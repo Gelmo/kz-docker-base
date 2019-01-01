@@ -20,6 +20,8 @@ RUN apt-get update && \
         zlib1g:i386 \
         libc6-i386 \
         lib32stdc++6 \
+		nano \
+		vim \
     # Cleanup
     && apt-get -y autoremove \
     && apt-get -y clean \
