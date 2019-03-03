@@ -38,7 +38,7 @@ RUN find /home/linuxgsm/linuxgsm -type f -name "*.sh" -exec chmod u+x {} \; \
 
 ADD --chown=linuxgsm:linuxgsm common.cfg.tmpl ./lgsm/config-default/config-lgsm/
 ADD --chown=linuxgsm:linuxgsm functions/* /home/linuxgsm/linuxgsm/lgsm/functions/
-ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/
+ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/config-lgsm/csgoserver/
 
 USER linuxgsm
@@ -47,7 +47,9 @@ RUN parse-env --env "LGSM_" >> env.json
 RUN rm -f INSTALLING.LOCK
 RUN mkdir -p ~/linuxgsm/lgsm/config-lgsm/$LGSM_GAMESERVERNAME
 
-RUN mkdir /home/linuxgsm/linuxgsm/log/
-RUN mkdir /home/linuxgsm/linuxgsm/log/script/
-RUN touch /home/linuxgsm/linuxgsm/log/script/lgsm-gameserver-script.log
-RUN chmod +x /home/linuxgsm/linuxgsm/lgsm/functions/*.sh
+RUN mkdir /home/linuxgsm/linuxgsm/log/ \
+ && mkdir /home/linuxgsm/linuxgsm/log/script/ \
+ && touch /home/linuxgsm/linuxgsm/log/script/lgsm-gameserver-script.log \
+ && chmod +x /home/linuxgsm/linuxgsm/lgsm/functions/*.sh \
+ &&./linuxgsm.sh csgoserver \
+ && mv csgoserver lgsm-gameserver
