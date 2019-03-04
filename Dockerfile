@@ -9,6 +9,9 @@ ENV LGSM_GAMESERVERNAME csgoserver
 ENV LGSM_UPDATEINSTALLSKIP UPDATE
 EXPOSE 27015/tcp
 EXPOSE 27015/udp
+ENV LANG en_US.UTF-8 
+ENV LANGUAGE en_US:en 
+ENV LC_ALL en_US.UTF-8
 
 USER root 
 
@@ -42,6 +45,9 @@ ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/config-lgsm/csgoserver/
 ADD --chown=linuxgsm:linuxgsm totenfluch-mapchooser.zip /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm config.add /home/linuxgsm/linuxgsm/
+
+RUN locale-gen --purge en_US.UTF-8
+RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 USER linuxgsm
 
