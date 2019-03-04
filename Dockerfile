@@ -53,3 +53,13 @@ RUN mkdir /home/linuxgsm/linuxgsm/log/ \
  && chmod +x /home/linuxgsm/linuxgsm/lgsm/functions/*.sh \
  &&./linuxgsm.sh csgoserver \
  && mv csgoserver lgsm-gameserver
+
+RUN ./lgsm-gameserver auto-install
+
+RUN echo "metamod" | ./lgsm-gameserver mi \
+ && sleep 5s
+
+RUN echo "sourcemod" | ./lgsm-gameserver mi \
+ && sleep 5s
+
+RUN mv -f databases.cfg /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/
