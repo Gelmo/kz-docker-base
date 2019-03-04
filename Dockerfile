@@ -40,6 +40,7 @@ ADD --chown=linuxgsm:linuxgsm common.cfg.tmpl ./lgsm/config-default/config-lgsm/
 ADD --chown=linuxgsm:linuxgsm functions/* /home/linuxgsm/linuxgsm/lgsm/functions/
 ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/config-lgsm/csgoserver/
+ADD --chown=linuxgsm:linuxgsm totenfluch-mapchooser.zip /home/linuxgsm/linuxgsm/
 
 USER linuxgsm
 
@@ -63,3 +64,21 @@ RUN echo "sourcemod" | ./lgsm-gameserver mi \
  && sleep 5s
 
 RUN mv -f databases.cfg /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/
+
+RUN mkdir ~/downloads/ \
+ && cd ~/downloads/ \
+ && wget https://bitbucket.org/GameChaos/distbug/downloads/distbugfix-1.0.zip \
+ && unzip distbug* \
+ && rm -rf distbug* \
+ && rsync -Pva /home/linuxgsm/downloads/ /home/linuxgsm/linuxgsm/serverfiles/csgo/ \
+ && wget https://bitbucket.org/Sikarii/movementhud/downloads/MovementHUD-latest.smx \
+ && mv /home/linuxgsm/downloads/MovementHUD-latest.smx /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/plugins/ \
+ && rm -rf ~/downloads/* \
+ && mv /home/linuxgsm/linuxgsm/totenfluch-mapchooser.zip ~/downloads/ \
+ && unzip totenfluch* \
+ && rm -rf totenfluch* \
+ && rsync -Pva /home/linuxgsm/downloads/ /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/ \
+ && rm -rf ~/downloads/ \
+ && cd ~/linuxgsm/
+
+CMD ["bash"]
