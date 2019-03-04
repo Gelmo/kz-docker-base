@@ -44,6 +44,7 @@ ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/config-lgsm/csgoserver/
 ADD --chown=linuxgsm:linuxgsm totenfluch-mapchooser.zip /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm config.add /home/linuxgsm/linuxgsm/
+ADD --chown=linuxgsm:linuxgsm exception.add /home/linuxgsm/linuxgsm/
 
 RUN locale-gen --purge en_US.UTF-8 \
  && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
@@ -84,12 +85,15 @@ RUN mkdir ~/downloads/ \
  && unzip totenfluch* \
  && rm -rf totenfluch* \
  && rsync -Pva /home/linuxgsm/downloads/ /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/ \
+ && mv /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/scripting/*.smx /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/plugins/ \
  && rm -rf ~/downloads/ \
  && cd ~/linuxgsm/
 
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
+RUN cat /home/linuxgsm/linuxgsm/exception.add >> /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/kztimer/exception_list.txt
 RUN dos2unix /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg \
- && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
+ && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg \
+ && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/kztimer/exception_list.txt
 
 CMD ["bash"]
