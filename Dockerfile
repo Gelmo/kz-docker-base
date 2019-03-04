@@ -23,6 +23,7 @@ RUN apt-get update && \
 		nano \
 		vim \
         locales \
+        dos2unix \
     # Cleanup
     && apt-get -y autoremove \
     && apt-get -y clean \
@@ -87,5 +88,8 @@ RUN mkdir ~/downloads/ \
  && cd ~/linuxgsm/
 
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg
+RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
+RUN dos2unix /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg \
+ && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
 
 CMD ["bash"]
