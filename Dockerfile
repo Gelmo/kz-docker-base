@@ -91,9 +91,7 @@ RUN mkdir ~/downloads/ \
 
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
-RUN cat /home/linuxgsm/linuxgsm/exception.add >> /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/kztimer/exception_list.txt
 RUN dos2unix /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg \
- && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg \
- && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/kztimer/exception_list.txt
+ && dos2unix /home/linuxgsm/linuxgsm/serverfiles/csgo/cfg/lgsm-gameserver.cfg
 
 CMD ["bash"]
