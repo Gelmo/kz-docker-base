@@ -41,6 +41,7 @@ ADD --chown=linuxgsm:linuxgsm functions/* /home/linuxgsm/linuxgsm/lgsm/functions
 ADD --chown=linuxgsm:linuxgsm databases.cfg /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/config-lgsm/csgoserver/
 ADD --chown=linuxgsm:linuxgsm totenfluch-mapchooser.zip /home/linuxgsm/linuxgsm/
+ADD --chown=linuxgsm:linuxgsm config.add /home/linuxgsm/linuxgsm/
 
 USER linuxgsm
 
@@ -80,5 +81,7 @@ RUN mkdir ~/downloads/ \
  && rsync -Pva /home/linuxgsm/downloads/ /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/ \
  && rm -rf ~/downloads/ \
  && cd ~/linuxgsm/
+
+RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg
 
 CMD ["bash"]
