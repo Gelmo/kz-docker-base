@@ -25,6 +25,7 @@ RUN apt-get update && \
         lib32stdc++6 \
 		nano \
 		vim \
+        locales \
     # Cleanup
     && apt-get -y autoremove \
     && apt-get -y clean \
@@ -46,8 +47,8 @@ ADD --chown=linuxgsm:linuxgsm lgsm-gameserver.cfg /home/linuxgsm/linuxgsm/lgsm/c
 ADD --chown=linuxgsm:linuxgsm totenfluch-mapchooser.zip /home/linuxgsm/linuxgsm/
 ADD --chown=linuxgsm:linuxgsm config.add /home/linuxgsm/linuxgsm/
 
-RUN locale-gen --purge en_US.UTF-8
-RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+RUN locale-gen --purge en_US.UTF-8 \
+ && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 USER linuxgsm
 
