@@ -87,6 +87,8 @@ RUN mkdir ~/downloads/ \
  && rsync -Pva /home/linuxgsm/downloads/ /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/ \
  && mv /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/scripting/*.smx /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/plugins/ \
  && rm -rf ~/downloads/ \
+ && rm -rf /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/plugins/mapchooser_extended_sounds.smx \
+ && rm -rf /home/linuxgsm/linuxgsm/serverfiles/csgo/addons/sourcemod/configs/mapchooser_extended/sounds/tf.cfg \
  && cd ~/linuxgsm/
 
 RUN cat /home/linuxgsm/linuxgsm/config.add >> /home/linuxgsm/linuxgsm/lgsm/config-default/config-game/server.cfg
